@@ -9,6 +9,5 @@ public class BookServiceApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(BookServiceApplication.class, args);
 	}
-//avnadmin
-//AVNS_yBaMfjmAymvzqu_tANS
+
 }
