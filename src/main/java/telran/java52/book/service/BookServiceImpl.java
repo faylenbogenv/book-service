@@ -71,7 +71,6 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
-	//TODO
 	public Iterable<BookDto> findBooksByAuthor(String authorName) {
 		Author author = authorRepository.findById(authorName).orElseThrow(EntityNotFoundException::new);
 		return author.getBooks().stream()
@@ -80,7 +79,6 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
-	//TODO
 	public Iterable<BookDto> findBooksByPublisher(String publisherName) {
 		Publisher publisher = publisherRepository.findById(publisherName).orElseThrow(EntityNotFoundException::new);
 		return publisher.getBooks().stream()
@@ -89,7 +87,6 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
-	//TODO
 	public Iterable<AuthorDto> findBookAuthors(String isbn) {
 		Book book = bookRepository.findById(isbn).orElseThrow(EntityNotFoundException::new);
 		return book.getAuthors().stream()
@@ -108,7 +105,6 @@ public class BookServiceImpl implements BookService {
 
 	@Transactional
 	@Override
-	//TODO
 	public AuthorDto removeAuthor(String authorName) {
 		Author author = authorRepository.findById(authorName).orElseThrow(EntityNotFoundException::new);
 		authorRepository.deleteById(authorName);

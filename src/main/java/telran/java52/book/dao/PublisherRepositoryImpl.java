@@ -25,8 +25,10 @@ public class PublisherRepositoryImpl implements PublisherRepository {
 
 	@Override
 	public Stream<Publisher> findDistinctByBooksAuthorsName(String authorName) {
-		// TODO Auto-generated method stub
-		return null;
+		String jpql = "select distinct p from Publisher p join p.books b join b.authors a where a.name = :authorName";
+		return em.createQuery(jpql, Publisher.class)
+				.setParameter("authorName", authorName)
+				.getResultStream();
 	}
 
 	@Override
