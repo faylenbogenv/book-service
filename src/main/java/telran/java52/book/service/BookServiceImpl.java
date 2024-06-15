@@ -36,11 +36,11 @@ public class BookServiceImpl implements BookService {
 			return false;
 		}
 		Publisher publisher = publisherRepository.findById(bookDto.getPublisher())
-				.orElse(publisherRepository.save(new Publisher(bookDto.getPublisher())));
+				.orElseGet(() -> publisherRepository.save(new Publisher(bookDto.getPublisher())));
 		
 		Set<Author> authors = bookDto.getAuthors().stream()
 			.map(a -> authorRepository.findById(a.getName())
-					.orElse(authorRepository.save(new Author(a.getName(), a.getBirthDate()))))
+					.orElseGet(() -> authorRepository.save(new Author(a.getName(), a.getBirthDate()))))
 					.collect(Collectors.toSet());
 		
 		Book book = new Book(bookDto.getIsbn(), bookDto.getTitle(), authors, publisher);
@@ -71,6 +71,7 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
+	//TODO
 	public Iterable<BookDto> findBooksByAuthor(String authorName) {
 		Author author = authorRepository.findById(authorName).orElseThrow(EntityNotFoundException::new);
 		return author.getBooks().stream()
@@ -79,6 +80,7 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
+	//TODO
 	public Iterable<BookDto> findBooksByPublisher(String publisherName) {
 		Publisher publisher = publisherRepository.findById(publisherName).orElseThrow(EntityNotFoundException::new);
 		return publisher.getBooks().stream()
@@ -87,6 +89,7 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
+	//TODO
 	public Iterable<AuthorDto> findBookAuthors(String isbn) {
 		Book book = bookRepository.findById(isbn).orElseThrow(EntityNotFoundException::new);
 		return book.getAuthors().stream()
@@ -96,6 +99,7 @@ public class BookServiceImpl implements BookService {
 
 	@Transactional(readOnly = true)
 	@Override
+	//TODO
 	public Iterable<String> findPublishersByAuthor(String authorName) {
 		return publisherRepository.findDistinctByBooksAuthorsName(authorName)
 				.map(Publisher::getPublisherName)
@@ -104,6 +108,7 @@ public class BookServiceImpl implements BookService {
 
 	@Transactional
 	@Override
+	//TODO
 	public AuthorDto removeAuthor(String authorName) {
 		Author author = authorRepository.findById(authorName).orElseThrow(EntityNotFoundException::new);
 		authorRepository.deleteById(authorName);

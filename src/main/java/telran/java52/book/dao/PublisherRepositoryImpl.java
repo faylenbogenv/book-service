@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -33,9 +34,11 @@ public class PublisherRepositoryImpl implements PublisherRepository {
 		return Optional.ofNullable(em.find(Publisher.class, publisher));
 	}
 
+//	@Transactional
 	@Override
 	public Publisher save(Publisher publisher) {
 		em.persist(publisher);
+//		em.merge(publisher);
 		return publisher;
 	}
 
